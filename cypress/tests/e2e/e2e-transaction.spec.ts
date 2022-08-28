@@ -1,6 +1,4 @@
-import Dinero from "dinero.js";
 import { User } from "../../../src/models";
-import { isMobile } from "../../support/utils";
 
 type NewTransactionTestCtx = {
   allUsers?: User[];
@@ -8,7 +6,7 @@ type NewTransactionTestCtx = {
   contact?: User;
 };
 
-describe("New Transaction", function () {
+describe("Transactions tests", function () {
   const ctx: NewTransactionTestCtx = {};
 
   beforeEach(function () {
