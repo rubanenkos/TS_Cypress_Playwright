@@ -1,0 +1,8 @@
+E2E :
++ Sing-up
++ Login
++ Create a new bank account
+ Create transactions
++ Renders and paginates all transactions feeds
+ Likes a transaction
++ Comment on a transactions

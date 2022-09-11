@@ -1,5 +1,5 @@
 import { User } from "../../../src/models";
-import { isMobile } from "../../support/utils";
+
 const newAccount = {
   bankName: "Test Bank",
   routingNumber: "123456789",
@@ -11,11 +11,6 @@ describe("Bank Account", function () {
     cy.database("find", "users").then((user: User) => {
       cy.loginByXstate(user.username);
     });
-
-    if (isMobile()) {
-      cy.getBySel("sidenav-toggle").click();
-    }
-
   });
 
   it("Creates a new bank account", function () {

@@ -1,5 +1,4 @@
 import { User } from "../../../src/models";
-import { isMobile } from "../../support/utils";
 
 const urlSignIn = "/signin";
 type LoginCtx = {
@@ -11,7 +10,6 @@ describe("Login tests", function () {
     const ctx = {} as LoginCtx;
     const userPassword = "s3cret"
 
-
   beforeEach(function () {
     cy.task("db:seed");
 
@@ -19,10 +17,6 @@ describe("Login tests", function () {
         ctx.anyUser = users[0];
     });
   });
-
-    if (isMobile()) {
-      cy.getBySel("sidenav-toggle").click();
-    }
 
   it("Login", function () {
     cy.visit(urlSignIn, { log: false })
