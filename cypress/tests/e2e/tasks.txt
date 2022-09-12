@@ -2,7 +2,7 @@ E2E :
 + Sing-up
 + Login
 + Create a new bank account
- Create transactions
++ Create transactions
 + Renders and paginates all transactions feeds
- Likes a transaction
++ Likes a transaction
 + Comment on a transactions
