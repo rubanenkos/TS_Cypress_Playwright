@@ -1,4 +1,6 @@
-import { User } from "../../../src/models";
+import {getUserAndLogin} from "./helpers";
+import BasePage from "./Pages/base-page";
+import BankAccountPage from "./Pages/bank-account-page";
 
 const newAccount = {
   bankName: "Test Bank",
@@ -6,23 +8,24 @@ const newAccount = {
   accountNumber: "1234567890"
 }
 describe("Bank Account", function () {
+  const basePage = new BasePage()
+  const bankAccounts = new BankAccountPage()
+
   beforeEach(function () {
     cy.task("db:seed");
-    cy.database("find", "users").then((user: User) => {
-      cy.loginByXstate(user.username);
-    });
+    getUserAndLogin()
   });
 
   it("Creates a new bank account", function () {
-    cy.getBySel("sidenav-bankaccounts").click();
-    cy.getBySel("bankaccount-new").click()
+    basePage.bankAccounts().click();
+    bankAccounts.newBankAccountButton().click()
 
-    cy.getBySel("bankaccount-submit").should("be.visible");
+    bankAccounts.submitButton().should("be.visible");
 
-    cy.getBySel("bankaccount-bankName-input").should("be.visible").type(newAccount.bankName)
-    cy.getBySel("bankaccount-routingNumber-input").should("be.visible").type(newAccount.routingNumber)
-    cy.getBySel("bankaccount-accountNumber-input").should("be.visible").type(newAccount.accountNumber)
-    cy.getBySel("bankaccount-submit").should("be.visible").click()
+    bankAccounts.bankNameInput().should("be.visible").type(newAccount.bankName)
+    bankAccounts.routingNumberInput().should("be.visible").type(newAccount.routingNumber)
+    bankAccounts.accountNumber().should("be.visible").type(newAccount.accountNumber)
+    bankAccounts.submitButton().should("be.visible").click()
 
     cy.contains(newAccount.bankName).should("be.visible");
 

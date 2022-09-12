@@ -10,7 +10,20 @@ class TransactionDetailPage {
     transactionItem() {
         return cy.get('[data-test*=transaction-item]')
     }
+    transactionCommentInput() {
+        return cy.get('[data-test*=transaction-comment-input]')
+    }
+    commentList() {
+        return cy.get('[data-test="comments-list"]')
+    }
+
+    commentListItem() {
+        return cy.get('[data-test*="comment-list-item"]')
+    }
     
+    commentsTitle() {
+        return cy.contains("Comments")
+    }
 }
 
  export default TransactionDetailPage

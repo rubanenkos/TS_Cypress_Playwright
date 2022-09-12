@@ -1,4 +1,5 @@
-import { isMobile } from "../../support/utils";
+import LoginPage from "./Pages/login-page";
+import SignUpPage from "./Pages/signup-page";
 
 const urlSignUp = "/signup";
 const newUser = {
@@ -9,30 +10,28 @@ const newUser = {
 };
 
 describe("SignUp tests", function () {
-
+  const signUpPage = new SignUpPage()
+  const loginPage = new LoginPage()
   beforeEach(function () {
     cy.task("db:seed");
   });
 
-    if (isMobile()) {
-      cy.getBySel("sidenav-toggle").click();
-    }
-
   it("SignUp succesfully", function () {
-    cy.visit(urlSignUp, { log: false })
-    cy.getBySel("signup-title").should("be.visible");
+    cy.visit(urlSignUp, { log: true })
+    signUpPage.title().should("be.visible");
 
-    cy.get("[data-test*=signup-first-name]").should("be.visible").type(newUser.firstName);
-    cy.get("[data-test*=signup-last-name]").should("be.visible").type(newUser.lastname);
-    cy.get("[data-test*=signup-username]").should("be.visible").type(newUser.userName);
-    cy.get("[data-test*=signup-password").should("be.visible").type(newUser.password);
-    cy.get("[data-test*=signup-confirmPassword").should("be.visible").type(newUser.password);   
+    signUpPage.firstNameInput().should("be.visible").type(newUser.firstName);
+    signUpPage.lastNameInput().should("be.visible").type(newUser.lastname);
+    signUpPage.userNameInput().should("be.visible").type(newUser.userName);
+    signUpPage.passwordInput().should("be.visible").type(newUser.password);
+    signUpPage.confirmPasswordInput().should("be.visible").type(newUser.password);   
 
-    cy.get("[data-test*=signup-submit]").should("be.visible").click();
-    cy.getBySel("signin-submit").should("be.visible");
+    signUpPage.submitButton().should("be.visible").click();
+    loginPage.signInButton().should("be.visible");
 
     cy.database("find", "users", { username: newUser.userName })
       .its("username")
       .should("equal", newUser.userName);
   });
-});
+})
+

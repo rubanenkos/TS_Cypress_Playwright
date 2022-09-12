@@ -1,4 +1,8 @@
 class BasePage {
+    
+    navBarUserName() {
+        return cy.getBySel("sidenav-username")
+    }
 
     navBarHomeItem() {
         return cy.get('[data-test*=sidenav-home]')
@@ -8,6 +12,10 @@ class BasePage {
         return cy.getBySelLike("new-transaction")
     }
 
+    bankAccounts() {
+        return cy.getBySel("sidenav-bankaccounts")
+    }
+    
     alertBarSuccess() {
        return cy.getBySel("alert-bar-success")
     }
