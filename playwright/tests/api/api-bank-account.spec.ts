@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { testData } from "../testdata.mjs";
+import { testData } from "../testdata";
 
 const apiLogin = "/login";
 const apiBankAccounts = "/bankaccounts";
